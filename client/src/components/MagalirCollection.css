@@ -1,0 +1,626 @@
+/* Magalir Collection - Professional Dark Theme */
+.magalir-collection {
+  min-height: 100vh;
+  background: #0f172a;
+  color: #f1f5f9;
+  padding: 20px;
+}
+
+/* Header */
+.magalir-collection .collection-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 24px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.magalir-collection .back-btn {
+  background: #334155;
+  border: 1px solid #475569;
+  color: #e2e8f0;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.magalir-collection .header-title {
+  flex: 1;
+}
+
+.magalir-collection .header-title h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.magalir-collection .member-count {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.magalir-collection .month-input {
+  padding: 12px 18px;
+  border: 1px solid #475569;
+  border-radius: 10px;
+  background: #1e293b;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.magalir-collection .month-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Summary Bar */
+.magalir-collection .summary-bar {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.magalir-collection .summary-item {
+  flex: 1;
+  min-width: 130px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.magalir-collection .summary-item.collected {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.3) 0%, rgba(16, 185, 129, 0.2) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.magalir-collection .summary-item.pending {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.3) 0%, rgba(239, 68, 68, 0.2) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.magalir-collection .summary-item.total {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.3) 0%, rgba(219, 39, 119, 0.2) 100%);
+  border: 1px solid rgba(236, 72, 153, 0.4);
+}
+
+.magalir-collection .summary-item .value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.magalir-collection .summary-item .label {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* Action Bar */
+.magalir-collection .action-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.magalir-collection .action-btn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.magalir-collection .action-btn.add {
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  color: white;
+  flex: 1;
+}
+
+.magalir-collection .action-btn.print {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.magalir-collection .action-btn.wa {
+  background: rgba(37, 211, 102, 0.2);
+  color: #25d366;
+  border: 1px solid rgba(37, 211, 102, 0.4);
+}
+
+.magalir-collection .action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Search */
+.magalir-collection .search-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #475569;
+  border-radius: 12px;
+  background: #1e293b;
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.magalir-collection .search-input::placeholder {
+  color: #94a3b8;
+}
+
+.magalir-collection .loading {
+  text-align: center;
+  padding: 60px;
+  color: #94a3b8;
+}
+
+.magalir-collection .empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #64748b;
+}
+
+.magalir-collection .add-first-btn {
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/* Split View */
+.magalir-collection .split-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.magalir-collection .column {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.magalir-collection .paid-column {
+  background: #0f172a;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.magalir-collection .unpaid-column {
+  background: #0f172a;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.magalir-collection .column-title {
+  margin: 0;
+  padding: 16px 20px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.magalir-collection .column-title.paid {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.magalir-collection .column-title.unpaid {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.magalir-collection .column-list {
+  padding: 12px;
+  max-height: calc(100vh - 400px);
+  overflow-y: auto;
+  background: #0f172a;
+}
+
+.magalir-collection .empty-msg {
+  text-align: center;
+  padding: 40px 20px;
+  color: #64748b;
+}
+
+/* List Item */
+.magalir-collection .list-item {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.magalir-collection .list-item.paid {
+  border-left: 4px solid #22c55e;
+}
+
+.magalir-collection .list-item.unpaid {
+  border-left: 4px solid #ef4444;
+}
+
+.magalir-collection .item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.magalir-collection .item-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.magalir-collection .item-amount {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.magalir-collection .list-item.paid .item-amount {
+  color: #4ade80;
+}
+
+.magalir-collection .list-item.unpaid .item-amount {
+  color: #f87171;
+}
+
+/* Item Actions */
+.magalir-collection .item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.magalir-collection .date-badge {
+  background: rgba(34, 197, 94, 0.25);
+  color: #86efac;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.magalir-collection .item-actions .action-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+}
+
+.magalir-collection .item-actions .action-btn.wa {
+  background: rgba(37, 211, 102, 0.2);
+  color: #25d366;
+  border: 1px solid rgba(37, 211, 102, 0.4);
+}
+
+.magalir-collection .item-actions .action-btn.print {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.magalir-collection .item-actions .action-btn.undo {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.magalir-collection .item-actions .action-btn.history {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.magalir-collection .pay-btn {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Modal */
+.magalir-collection .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1002;
+  padding: 20px;
+}
+
+.magalir-collection .modal {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 450px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.magalir-collection .history-modal {
+  max-width: 500px;
+}
+
+.magalir-collection .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #334155;
+}
+
+.magalir-collection .modal-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.magalir-collection .close-btn {
+  background: rgba(239, 68, 68, 0.2);
+  border: none;
+  color: #f87171;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.magalir-collection .modal-body {
+  padding: 24px;
+}
+
+/* History Modal */
+.magalir-collection .history-member-info {
+  text-align: center;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #334155;
+}
+
+.magalir-collection .history-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.magalir-collection .history-phone {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.magalir-collection .history-summary {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.magalir-collection .summary-stat {
+  flex: 1;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.magalir-collection .stat-number {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #f472b6;
+  margin-bottom: 4px;
+}
+
+.magalir-collection .stat-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.magalir-collection .no-payments {
+  text-align: center;
+  color: #94a3b8;
+  padding: 30px;
+}
+
+.magalir-collection .history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.magalir-collection .history-item {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #22c55e;
+}
+
+.magalir-collection .history-month .month-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.magalir-collection .history-details {
+  text-align: right;
+}
+
+.magalir-collection .history-amount {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.magalir-collection .history-date {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.magalir-collection .delete-member-btn {
+  width: 100%;
+  padding: 14px;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Form */
+.magalir-collection .form-group {
+  margin-bottom: 18px;
+}
+
+.magalir-collection .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #e2e8f0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.magalir-collection .form-group input,
+.magalir-collection .form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.magalir-collection .form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.magalir-collection .btn-cancel {
+  flex: 1;
+  padding: 14px;
+  background: #334155;
+  border: none;
+  border-radius: 10px;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.magalir-collection .btn-save {
+  flex: 1;
+  padding: 14px;
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Scrollbar */
+.magalir-collection .column-list::-webkit-scrollbar,
+.magalir-collection .history-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.magalir-collection .column-list::-webkit-scrollbar-track,
+.magalir-collection .history-list::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.magalir-collection .column-list::-webkit-scrollbar-thumb,
+.magalir-collection .history-list::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .magalir-collection {
+    padding: 15px;
+  }
+
+  .magalir-collection .collection-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 15px 18px;
+  }
+
+  .magalir-collection .header-title {
+    order: 2;
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .magalir-collection .back-btn {
+    order: 1;
+  }
+
+  .magalir-collection .month-input {
+    order: 3;
+    flex: 1;
+  }
+
+  .magalir-collection .split-view {
+    grid-template-columns: 1fr;
+  }
+
+  .magalir-collection .action-bar {
+    flex-wrap: wrap;
+  }
+
+  .magalir-collection .action-btn.add {
+    flex: 1 1 100%;
+  }
+
+  .magalir-collection .item-actions {
+    flex-wrap: wrap;
+  }
+}

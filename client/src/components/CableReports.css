@@ -1,0 +1,475 @@
+/* Cable Reports - Professional Dark Theme */
+.cable-reports {
+  min-height: 100vh;
+  background: #0f172a !important;
+  color: #f1f5f9 !important;
+  padding: 20px;
+}
+
+/* Header */
+.cable-reports .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.cable-reports .page-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff !important;
+}
+
+.cable-reports .back-btn {
+  background: #334155 !important;
+  border: 1px solid #475569 !important;
+  color: #e2e8f0 !important;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cable-reports .back-btn:hover {
+  background: #475569 !important;
+}
+
+.cable-reports .month-select {
+  padding: 12px 18px;
+  border: 1px solid #475569 !important;
+  border-radius: 10px;
+  background: #1e293b !important;
+  color: #ffffff !important;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.cable-reports .month-select option {
+  background: #1e293b !important;
+  color: #ffffff !important;
+}
+
+.cable-reports .loading {
+  text-align: center;
+  padding: 60px;
+  color: #94a3b8 !important;
+  font-size: 1.1rem;
+}
+
+/* Report Summary */
+.cable-reports .report-summary {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.cable-reports .report-summary h2 {
+  margin: 0 0 18px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f8fafc !important;
+}
+
+.cable-reports .summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.cable-reports .summary-item {
+  background: rgba(15, 23, 42, 0.5) !important;
+  border: 1px solid #334155 !important;
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+}
+
+.cable-reports .summary-item.customers {
+  border-top: 4px solid #06b6d4 !important;
+}
+
+.cable-reports .summary-item.paid {
+  border-top: 4px solid #22c55e !important;
+}
+
+.cable-reports .summary-item.unpaid {
+  border-top: 4px solid #ef4444 !important;
+}
+
+.cable-reports .summary-item.collected {
+  border-top: 4px solid #3b82f6 !important;
+}
+
+.cable-reports .summary-item.pending {
+  border-top: 4px solid #f59e0b !important;
+}
+
+.cable-reports .summary-item .value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff !important;
+}
+
+.cable-reports .summary-item .label {
+  display: block;
+  font-size: 0.85rem;
+  color: #94a3b8 !important;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Charts Section */
+.cable-reports .charts-section {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.cable-reports .charts-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f8fafc !important;
+}
+
+.cable-reports .charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.cable-reports .chart-card {
+  background: rgba(15, 23, 42, 0.5) !important;
+  border: 1px solid #334155 !important;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.cable-reports .chart-card.wide {
+  grid-column: span 2;
+}
+
+.cable-reports .chart-card h3 {
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e2e8f0 !important;
+  text-align: center;
+}
+
+.cable-reports .chart-container {
+  width: 100%;
+}
+
+.cable-reports .chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 12px;
+}
+
+.cable-reports .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #94a3b8 !important;
+}
+
+.cable-reports .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.cable-reports .dot.green {
+  background: #22c55e;
+}
+
+.cable-reports .dot.red {
+  background: #ef4444;
+}
+
+/* Custom Tooltip */
+.cable-reports .custom-tooltip {
+  background: #1e293b !important;
+  border: 1px solid #475569 !important;
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.cable-reports .custom-tooltip .tooltip-label {
+  margin: 0 0 6px 0;
+  font-weight: 600;
+  color: #f8fafc !important;
+}
+
+.cable-reports .custom-tooltip p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+/* Export Section */
+.cable-reports .export-section {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.cable-reports .export-section h2 {
+  margin: 0 0 18px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f8fafc !important;
+}
+
+.cable-reports .export-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.cable-reports .export-btn {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.cable-reports .export-btn.print {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  color: white !important;
+}
+
+.cable-reports .export-btn.csv {
+  background: rgba(34, 197, 94, 0.2) !important;
+  color: #4ade80 !important;
+  border: 1px solid rgba(34, 197, 94, 0.4) !important;
+}
+
+.cable-reports .export-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Unpaid Section */
+.cable-reports .unpaid-section,
+.cable-reports .payments-section {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.cable-reports .unpaid-section h2,
+.cable-reports .payments-section h2 {
+  margin: 0 0 18px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f8fafc !important;
+}
+
+.cable-reports .no-data {
+  text-align: center;
+  padding: 30px;
+  color: #64748b !important;
+  font-size: 0.95rem;
+}
+
+.cable-reports .unpaid-list,
+.cable-reports .payments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.cable-reports .unpaid-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: rgba(239, 68, 68, 0.1) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  border-radius: 12px;
+  border-left: 4px solid #ef4444 !important;
+}
+
+.cable-reports .unpaid-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cable-reports .unpaid-info strong {
+  font-size: 1rem;
+  color: #ffffff !important;
+}
+
+.cable-reports .unpaid-info span {
+  font-size: 0.85rem;
+  color: #94a3b8 !important;
+}
+
+.cable-reports .unpaid-amount {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f87171 !important;
+}
+
+/* Payments List */
+.cable-reports .payment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: rgba(34, 197, 94, 0.1) !important;
+  border: 1px solid rgba(34, 197, 94, 0.3) !important;
+  border-radius: 12px;
+  border-left: 4px solid #22c55e !important;
+}
+
+.cable-reports .payment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cable-reports .payment-info strong {
+  font-size: 1rem;
+  color: #ffffff !important;
+}
+
+.cable-reports .payment-info span {
+  font-size: 0.85rem;
+  color: #94a3b8 !important;
+}
+
+.cable-reports .payment-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.cable-reports .payment-mode {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  background: rgba(148, 163, 184, 0.15) !important;
+  border-radius: 10px;
+  color: #94a3b8 !important;
+}
+
+.cable-reports .payment-amount {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #4ade80 !important;
+}
+
+/* Scrollbar */
+.cable-reports .unpaid-list::-webkit-scrollbar,
+.cable-reports .payments-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cable-reports .unpaid-list::-webkit-scrollbar-track,
+.cable-reports .payments-list::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 3px;
+}
+
+.cable-reports .unpaid-list::-webkit-scrollbar-thumb,
+.cable-reports .payments-list::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+/* Recharts overrides */
+.cable-reports .recharts-text {
+  fill: #94a3b8 !important;
+}
+
+.cable-reports .recharts-legend-item-text {
+  color: #94a3b8 !important;
+}
+
+.cable-reports .recharts-cartesian-axis-tick-value {
+  fill: #94a3b8 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cable-reports {
+    padding: 15px;
+  }
+
+  .cable-reports .page-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 15px 18px;
+  }
+
+  .cable-reports .page-header h1 {
+    order: 2;
+    flex: 1 1 100%;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .cable-reports .back-btn {
+    order: 1;
+  }
+
+  .cable-reports .month-select {
+    order: 3;
+    flex: 1;
+  }
+
+  .cable-reports .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cable-reports .chart-card.wide {
+    grid-column: span 1;
+  }
+
+  .cable-reports .export-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .cable-reports .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .cable-reports .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cable-reports .chart-legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}

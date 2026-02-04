@@ -1,0 +1,672 @@
+/* Cable Customers - Professional Dark Theme */
+
+/* Force dark theme on entire component */
+.cable-customers,
+.cable-customers * {
+  box-sizing: border-box;
+}
+
+.cable-customers {
+  min-height: 100vh;
+  background: #0f172a !important;
+  color: #f1f5f9 !important;
+  padding: 20px;
+}
+
+/* Page Header */
+.cable-customers .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.cable-customers .page-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff !important;
+}
+
+.cable-customers .back-btn {
+  background: #334155 !important;
+  border: 1px solid #475569 !important;
+  color: #e2e8f0 !important;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cable-customers .back-btn:hover {
+  background: #475569 !important;
+}
+
+.cable-customers .add-btn {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  border: none !important;
+  color: white !important;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.cable-customers .add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Filters */
+.cable-customers .filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.cable-customers .search-input {
+  flex: 1;
+  padding: 14px 18px;
+  border: 1px solid #475569 !important;
+  border-radius: 12px;
+  background: #1e293b !important;
+  color: #ffffff !important;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.cable-customers .search-input:focus {
+  outline: none;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.cable-customers .search-input::placeholder {
+  color: #94a3b8 !important;
+}
+
+.cable-customers .status-filter {
+  padding: 14px 18px;
+  border: 1px solid #475569 !important;
+  border-radius: 12px;
+  background: #1e293b !important;
+  color: #ffffff !important;
+  font-size: 1rem;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.cable-customers .status-filter:focus {
+  outline: none;
+  border-color: #3b82f6 !important;
+}
+
+.cable-customers .status-filter option {
+  background: #1e293b !important;
+  color: #ffffff !important;
+}
+
+/* Stats Bar */
+.cable-customers .stats-bar {
+  display: flex;
+  gap: 25px;
+  padding: 14px 20px;
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.cable-customers .stats-bar span {
+  color: #94a3b8 !important;
+  font-weight: 500;
+}
+
+/* Customer List */
+.cable-customers .customer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cable-customers .loading,
+.cable-customers .empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #94a3b8 !important;
+  font-size: 1.1rem;
+}
+
+/* Customer Card - IMPORTANT */
+.cable-customers .customer-card {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 16px;
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.2s ease;
+}
+
+.cable-customers .customer-card:hover {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.cable-customers .customer-card.inactive {
+  opacity: 0.6;
+  background: #1e293b !important;
+}
+
+.cable-customers .customer-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cable-customers .customer-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+/* Customer Name - MUST BE WHITE */
+.cable-customers .customer-main h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff !important;
+}
+
+.cable-customers .status-badge {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.cable-customers .status-badge.active {
+  background: rgba(34, 197, 94, 0.2) !important;
+  color: #4ade80 !important;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.cable-customers .status-badge.inactive {
+  background: rgba(148, 163, 184, 0.2) !important;
+  color: #94a3b8 !important;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.cable-customers .customer-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: #94a3b8 !important;
+}
+
+.cable-customers .customer-details span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #94a3b8 !important;
+}
+
+.cable-customers .customer-details .amount {
+  color: #4ade80 !important;
+  font-weight: 600;
+}
+
+.cable-customers .address {
+  font-size: 0.85rem;
+  color: #64748b !important;
+  margin-top: 8px;
+}
+
+/* Action Buttons */
+.cable-customers .customer-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cable-customers .customer-actions button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.cable-customers .btn-history {
+  background: rgba(59, 130, 246, 0.2) !important;
+  color: #60a5fa !important;
+  border: 1px solid rgba(59, 130, 246, 0.4) !important;
+}
+
+.cable-customers .btn-history:hover {
+  background: rgba(59, 130, 246, 0.3) !important;
+}
+
+.cable-customers .btn-edit {
+  background: rgba(251, 191, 36, 0.2) !important;
+  color: #fbbf24 !important;
+  border: 1px solid rgba(251, 191, 36, 0.4) !important;
+}
+
+.cable-customers .btn-edit:hover {
+  background: rgba(251, 191, 36, 0.3) !important;
+}
+
+.cable-customers .btn-archive {
+  background: rgba(148, 163, 184, 0.2) !important;
+  color: #94a3b8 !important;
+  border: 1px solid rgba(148, 163, 184, 0.4) !important;
+}
+
+.cable-customers .btn-archive:hover {
+  background: rgba(148, 163, 184, 0.3) !important;
+}
+
+.cable-customers .btn-reactivate {
+  background: rgba(34, 197, 94, 0.2) !important;
+  color: #4ade80 !important;
+  border: 1px solid rgba(34, 197, 94, 0.4) !important;
+}
+
+.cable-customers .btn-reactivate:hover {
+  background: rgba(34, 197, 94, 0.3) !important;
+}
+
+.cable-customers .btn-delete {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #f87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.4) !important;
+}
+
+.cable-customers .btn-delete:hover {
+  background: rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Modal Overlay */
+.cable-customers .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* Modal */
+.cable-customers .modal {
+  background: #0f172a !important;
+  border: 1px solid #334155 !important;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8) !important;
+}
+
+.cable-customers .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #334155 !important;
+  background: #1e293b !important;
+  border-radius: 20px 20px 0 0;
+}
+
+.cable-customers .modal-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff !important;
+}
+
+.cable-customers .close-btn {
+  background: #334155 !important;
+  border: 1px solid #475569 !important;
+  color: #e2e8f0 !important;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.cable-customers .close-btn:hover {
+  background: rgba(239, 68, 68, 0.3) !important;
+  color: #f87171 !important;
+}
+
+.cable-customers .modal-body {
+  padding: 24px;
+  background: #0f172a !important;
+}
+
+/* Form Styles */
+.cable-customers .form-group {
+  margin-bottom: 20px;
+}
+
+.cable-customers .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff !important;
+}
+
+.cable-customers .form-group input,
+.cable-customers .form-group textarea,
+.cable-customers .form-group select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #475569 !important;
+  border-radius: 12px;
+  background: #1e293b !important;
+  color: #ffffff !important;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.cable-customers .form-group input::placeholder,
+.cable-customers .form-group textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.cable-customers .form-group input:focus,
+.cable-customers .form-group textarea:focus,
+.cable-customers .form-group select:focus {
+  outline: none;
+  border-color: #3b82f6 !important;
+  background: #1e293b !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+}
+
+.cable-customers .form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.cable-customers .form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #334155 !important;
+}
+
+.cable-customers .btn-cancel {
+  background: #334155 !important;
+  border: 1px solid #475569 !important;
+  color: #e2e8f0 !important;
+  padding: 12px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.cable-customers .btn-cancel:hover {
+  background: #475569 !important;
+}
+
+.cable-customers .btn-save {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  border: none !important;
+  color: white !important;
+  padding: 12px 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.cable-customers .btn-save:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.cable-customers .btn-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Payment History Modal */
+.cable-customers .payment-history-modal {
+  max-width: 500px;
+  background: #0f172a !important;
+}
+
+.cable-customers .history-customer-info {
+  text-align: center;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #334155;
+}
+
+.cable-customers .history-customer-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff !important;
+  margin-bottom: 4px;
+}
+
+.cable-customers .history-customer-phone {
+  font-size: 0.9rem;
+  color: #94a3b8 !important;
+}
+
+.cable-customers .history-summary {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.cable-customers .summary-stat {
+  flex: 1;
+  background: #1e293b !important;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.cable-customers .summary-stat .stat-number {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #4ade80 !important;
+  margin-bottom: 4px;
+}
+
+.cable-customers .summary-stat .stat-label {
+  font-size: 0.8rem;
+  color: #94a3b8 !important;
+}
+
+.cable-customers .no-payments {
+  text-align: center;
+  color: #94a3b8 !important;
+  padding: 30px;
+  font-size: 1rem;
+}
+
+.cable-customers .history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.cable-customers .history-item {
+  background: #1e293b !important;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #22c55e;
+}
+
+.cable-customers .history-month {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cable-customers .history-month .month-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff !important;
+}
+
+.cable-customers .history-month .payment-mode {
+  font-size: 0.75rem;
+  color: #64748b !important;
+  text-transform: uppercase;
+}
+
+.cable-customers .history-details {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cable-customers .history-amount {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #4ade80 !important;
+}
+
+.cable-customers .history-date {
+  font-size: 0.8rem;
+  color: #94a3b8 !important;
+}
+
+/* Scrollbar for history list */
+.cable-customers .history-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cable-customers .history-list::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.cable-customers .history-list::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+/* Scrollbar */
+.cable-customers .modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cable-customers .modal::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.cable-customers .modal::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cable-customers {
+    padding: 15px;
+  }
+
+  .cable-customers .page-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .cable-customers .page-header h1 {
+    order: -1;
+  }
+
+  .cable-customers .filters {
+    flex-direction: column;
+  }
+
+  .cable-customers .status-filter {
+    width: 100%;
+  }
+
+  .cable-customers .stats-bar {
+    justify-content: space-around;
+  }
+
+  .cable-customers .customer-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cable-customers .customer-actions {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #334155 !important;
+  }
+
+  .cable-customers .customer-details {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cable-customers .modal {
+    max-width: 100%;
+    margin: 10px;
+    max-height: 95vh;
+  }
+
+  .cable-customers .form-actions {
+    flex-direction: column;
+  }
+
+  .cable-customers .btn-cancel,
+  .cable-customers .btn-save {
+    width: 100%;
+    justify-content: center;
+  }
+}
