@@ -14,8 +14,7 @@ const getApiUrl = () => {
   }
 
   // Production: Use deployed backend URL
-  // TODO: Replace with your own deployed backend URL
-  return 'https://YOUR_VERCEL_BACKEND_URL/api';
+  return 'https://ravi-server.vercel.app/api';
 };
 
 export const API_URL = getApiUrl();
