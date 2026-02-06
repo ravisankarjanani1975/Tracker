@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
-function ModuleSelector({ onSelectModule }) {
+function ModuleSelector({ onSelectModule, onLogout, onUserManagement }) {
   const [hoveredModule, setHoveredModule] = useState(null);
+  const userName = localStorage.getItem('userName') || 'User';
+  const userRole = localStorage.getItem('userRole');
+  const isAdmin = userRole === 'admin';
 
   const modules = [
     {
@@ -38,8 +41,58 @@ function ModuleSelector({ onSelectModule }) {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '20px'
+      padding: '20px',
+      position: 'relative'
     }}>
+      {/* Top Bar with User Info */}
+      <div style={{
+        position: 'absolute',
+        top: '20px',
+        right: '20px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px'
+      }}>
+        <span style={{ color: '#94a3b8', fontSize: '14px' }}>
+          Welcome, <strong style={{ color: '#f59e0b' }}>{userName}</strong>
+          {isAdmin && <span style={{ marginLeft: '8px', background: '#dc2626', color: 'white', padding: '2px 8px', borderRadius: '4px', fontSize: '10px' }}>ADMIN</span>}
+        </span>
+        {isAdmin && onUserManagement && (
+          <button
+            onClick={onUserManagement}
+            style={{
+              background: '#3b82f6',
+              color: 'white',
+              border: 'none',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '12px',
+              fontWeight: 600
+            }}
+          >
+            👥 User Management
+          </button>
+        )}
+        {onLogout && (
+          <button
+            onClick={onLogout}
+            style={{
+              background: '#ef4444',
+              color: 'white',
+              border: 'none',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '12px',
+              fontWeight: 600
+            }}
+          >
+            Logout
+          </button>
+        )}
+      </div>
+
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         <h1 style={{

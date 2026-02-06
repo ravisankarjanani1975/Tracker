@@ -41,15 +41,16 @@ function Login({ onLoginSuccess }) {
   const handleAdminLogin = (e) => {
     e.preventDefault();
 
-    // Admin login with hardcoded credentials
-    if (userId === 'admin123' && password === 'admin123') {
+    // Admin login with credentials: admin / admin123
+    if (userId === 'admin' && password === 'admin123') {
       // Store password version and admin flag
       localStorage.setItem('passwordVersion', PASSWORD_VERSION);
       localStorage.setItem('userRole', 'admin');
       localStorage.setItem('userName', 'Admin');
+      localStorage.setItem('userId', 'admin');
       onLoginSuccess();
     } else {
-      setError('Invalid Admin ID or Password');
+      setError('Invalid Admin ID or Password. Use: admin / admin123');
       setTimeout(() => setError(''), 3000);
     }
   };
@@ -60,15 +61,10 @@ function Login({ onLoginSuccess }) {
     setIsLoading(true);
 
     try {
-      // Determine if loginIdentifier is email or phone
-      const loginData = isPhoneNumber(loginIdentifier)
-        ? { phone: loginIdentifier, password }
-        : { email: loginIdentifier, password };
-
       const response = await fetch(`${API_URL}/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(loginData)
+        body: JSON.stringify({ identifier: loginIdentifier, password })
       });
 
       const data = await response.json();
@@ -76,9 +72,9 @@ function Login({ onLoginSuccess }) {
       if (response.ok) {
         // Store user info
         localStorage.setItem('passwordVersion', PASSWORD_VERSION);
-        localStorage.setItem('userRole', data.user.role);
-        localStorage.setItem('userName', data.user.name);
-        localStorage.setItem('userId', data.user.id);
+        localStorage.setItem('userRole', data.role);
+        localStorage.setItem('userName', data.name);
+        localStorage.setItem('userId', data.id);
         onLoginSuccess();
       } else {
         setError(data.error || 'Login failed');

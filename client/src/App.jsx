@@ -4,9 +4,14 @@ import ModuleSelector from './components/ModuleSelector';
 import CableDashboard from './components/CableDashboard';
 import ChitDashboard from './components/ChitDashboard';
 import MagalirDashboard from './components/MagalirDashboard';
+import Login from './components/Login';
+import UserManagement from './components/UserManagement';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import './App.css';
+
+// Password version - must match Login.jsx
+const PASSWORD_VERSION = '2025-01-27-v2';
 
 // Chit Dashboard Wrapper
 function ChitDashboardWrapper({ onBackToModules }) {
@@ -16,6 +21,11 @@ function ChitDashboardWrapper({ onBackToModules }) {
 
 // Main App Content with module selection
 function AppContent() {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const storedVersion = localStorage.getItem('passwordVersion');
+    return storedVersion === PASSWORD_VERSION;
+  });
+
   const [selectedModule, setSelectedModule] = useState(() => {
     return localStorage.getItem('selectedModule') || null;
   });
@@ -28,13 +38,44 @@ function AppContent() {
     }
   }, [selectedModule]);
 
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('passwordVersion');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('selectedModule');
+    setIsAuthenticated(false);
+    setSelectedModule(null);
+  };
+
   const handleBackToModules = () => {
     setSelectedModule(null);
   };
 
+  // Show login if not authenticated
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={handleLoginSuccess} />;
+  }
+
+  const handleUserManagement = () => {
+    setSelectedModule('usermanagement');
+  };
+
   // Show module selector if no module selected
   if (!selectedModule) {
-    return <ModuleSelector onSelectModule={setSelectedModule} />;
+    return <ModuleSelector onSelectModule={setSelectedModule} onLogout={handleLogout} onUserManagement={handleUserManagement} />;
+  }
+
+  // USER MANAGEMENT (Admin only)
+  if (selectedModule === 'usermanagement') {
+    return (
+      <div className="app">
+        <UserManagement navigateTo={() => setSelectedModule(null)} />
+      </div>
+    );
   }
 
   // TV-CABLE MODULE

@@ -26,6 +26,192 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', version: VERSION, timestamp: new Date().toISOString() });
 });
 
+// ============ USER MANAGEMENT ============
+
+const ADMIN_PASSWORD = 'admin123';
+
+// Get all users
+app.get('/users', async (req, res) => {
+  try {
+    const snapshot = await db.collection('users').orderBy('created_at', 'desc').get();
+    const users = [];
+    snapshot.forEach(doc => {
+      users.push({ id: doc.id, ...doc.data() });
+    });
+    res.json(users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Register new user
+app.post('/users/register', async (req, res) => {
+  try {
+    const { name, email, phone, password } = req.body;
+
+    if (!name || !password || (!email && !phone)) {
+      return res.status(400).json({ error: 'Name, password, and email or phone are required' });
+    }
+
+    // Check if user already exists
+    let existingUser = null;
+    if (email) {
+      const emailCheck = await db.collection('users').where('email', '==', email).get();
+      if (!emailCheck.empty) existingUser = 'email';
+    }
+    if (phone) {
+      const phoneCheck = await db.collection('users').where('phone', '==', phone).get();
+      if (!phoneCheck.empty) existingUser = 'phone';
+    }
+
+    if (existingUser) {
+      return res.status(400).json({ error: `User with this ${existingUser} already exists` });
+    }
+
+    const newUser = {
+      name,
+      email: email || null,
+      phone: phone || null,
+      password, // In production, hash this!
+      status: 'pending', // pending, approved, rejected
+      role: 'user',
+      created_at: new Date().toISOString()
+    };
+
+    const docRef = await db.collection('users').add(newUser);
+    res.status(201).json({ id: docRef.id, ...newUser, message: 'Registration successful! Please wait for admin approval.' });
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// User login
+app.post('/users/login', async (req, res) => {
+  try {
+    const { identifier, password } = req.body; // identifier can be email or phone
+
+    if (!identifier || !password) {
+      return res.status(400).json({ error: 'Email/Phone and password are required' });
+    }
+
+    // Check for admin login
+    if (identifier === 'admin' && password === ADMIN_PASSWORD) {
+      return res.json({
+        id: 'admin',
+        name: 'Admin',
+        role: 'admin',
+        status: 'approved'
+      });
+    }
+
+    // Find user by email or phone
+    let userDoc = null;
+    const emailQuery = await db.collection('users').where('email', '==', identifier).get();
+    if (!emailQuery.empty) {
+      userDoc = emailQuery.docs[0];
+    } else {
+      const phoneQuery = await db.collection('users').where('phone', '==', identifier).get();
+      if (!phoneQuery.empty) {
+        userDoc = phoneQuery.docs[0];
+      }
+    }
+
+    if (!userDoc) {
+      return res.status(401).json({ error: 'User not found' });
+    }
+
+    const user = userDoc.data();
+
+    if (user.password !== password) {
+      return res.status(401).json({ error: 'Invalid password' });
+    }
+
+    if (user.status === 'pending') {
+      return res.status(403).json({ error: 'Your account is pending approval. Please wait for admin to approve.' });
+    }
+
+    if (user.status === 'rejected') {
+      return res.status(403).json({ error: 'Your account has been rejected. Please contact admin.' });
+    }
+
+    res.json({
+      id: userDoc.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+      status: user.status
+    });
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Approve user
+app.put('/users/:id/approve', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { admin_password } = req.body;
+
+    if (admin_password !== ADMIN_PASSWORD && admin_password !== 'Omsaimurugan') {
+      return res.status(403).json({ error: 'Invalid admin password' });
+    }
+
+    await db.collection('users').doc(id).update({
+      status: 'approved',
+      approved_at: new Date().toISOString()
+    });
+
+    res.json({ message: 'User approved successfully' });
+  } catch (error) {
+    console.error('Error approving user:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Reject user
+app.put('/users/:id/reject', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { admin_password } = req.body;
+
+    if (admin_password !== ADMIN_PASSWORD && admin_password !== 'Omsaimurugan') {
+      return res.status(403).json({ error: 'Invalid admin password' });
+    }
+
+    await db.collection('users').doc(id).update({
+      status: 'rejected',
+      rejected_at: new Date().toISOString()
+    });
+
+    res.json({ message: 'User rejected' });
+  } catch (error) {
+    console.error('Error rejecting user:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete user
+app.delete('/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { admin_password } = req.body;
+
+    if (admin_password !== ADMIN_PASSWORD && admin_password !== 'Omsaimurugan') {
+      return res.status(403).json({ error: 'Invalid admin password' });
+    }
+
+    await db.collection('users').doc(id).delete();
+    res.json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // ============ DASHBOARD STATS ============
 
 app.get('/api/stats', async (req, res) => {
