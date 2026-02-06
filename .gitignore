@@ -46,6 +46,3 @@ tests/
 artifacts/
 screenshots/
 videos/
-node_modules/
-package.json
-package-lock.json
