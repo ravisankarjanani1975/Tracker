@@ -14,6 +14,9 @@ function CableDashboard({ onBackToModules }) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isBackingUp, setIsBackingUp] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [paymentDate, setPaymentDate] = useState(() => new Date().toISOString().split('T')[0]);
   const fileInputRef = useRef(null);
 
   // Selected month state (default to current month)
@@ -72,17 +75,27 @@ function CableDashboard({ onBackToModules }) {
     return date.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
   };
 
-  // Quick mark as paid
-  const handleQuickPay = async (item) => {
+  // Show payment modal
+  const handleQuickPay = (item) => {
+    setSelectedCustomer(item);
+    setPaymentDate(new Date().toISOString().split('T')[0]); // Reset to today
+    setShowPaymentModal(true);
+  };
+
+  // Confirm payment with selected date
+  const confirmPayment = async () => {
+    if (!selectedCustomer || !paymentDate) return;
+
     try {
       const response = await fetch(`${API_URL}/payments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          customer_id: item.customer_id,
+          customer_id: selectedCustomer.customer_id,
           month: currentMonth,
-          amount: item.monthly_amount,
-          payment_mode: 'cash'
+          amount: selectedCustomer.monthly_amount,
+          payment_mode: 'cash',
+          payment_date: new Date(paymentDate).toISOString()
         })
       });
 
@@ -91,6 +104,8 @@ function CableDashboard({ onBackToModules }) {
         throw new Error(err.error || 'Failed');
       }
 
+      setShowPaymentModal(false);
+      setSelectedCustomer(null);
       mutate();
       mutateCollection();
     } catch (error) {
@@ -443,6 +458,112 @@ function CableDashboard({ onBackToModules }) {
         <div className="loading-overlay">
           <div className="loading-spinner"></div>
           <p>Loading...</p>
+        </div>
+      )}
+
+      {/* Payment Date Modal */}
+      {showPaymentModal && (
+        <div className="modal-overlay" onClick={() => setShowPaymentModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3 style={{ margin: '0 0 20px', color: '#1e293b', fontSize: '18px' }}>
+              Record Payment
+            </h3>
+
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', color: '#64748b', fontSize: '13px' }}>
+                Customer
+              </label>
+              <input
+                type="text"
+                value={selectedCustomer?.customer_name || ''}
+                readOnly
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '6px',
+                  fontSize: '14px',
+                  background: '#f8fafc',
+                  color: '#64748b'
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', color: '#64748b', fontSize: '13px' }}>
+                Amount
+              </label>
+              <input
+                type="text"
+                value={`₹${selectedCustomer?.monthly_amount || 0}`}
+                readOnly
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '6px',
+                  fontSize: '14px',
+                  background: '#f8fafc',
+                  color: '#64748b'
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', color: '#64748b', fontSize: '13px' }}>
+                Payment Date
+              </label>
+              <input
+                type="date"
+                value={paymentDate}
+                onChange={(e) => setPaymentDate(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '6px',
+                  fontSize: '14px',
+                  background: 'white',
+                  color: '#1e293b'
+                }}
+              />
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                onClick={() => setShowPaymentModal(false)}
+                style={{
+                  flex: 1,
+                  padding: '10px',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '6px',
+                  background: 'white',
+                  color: '#64748b',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: 500
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmPayment}
+                style={{
+                  flex: 1,
+                  padding: '10px',
+                  border: 'none',
+                  borderRadius: '6px',
+                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                  color: 'white',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: 600
+                }}
+              >
+                ✓ Confirm Payment
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
