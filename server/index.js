@@ -31,7 +31,7 @@ app.get('/api/health', (req, res) => {
 const ADMIN_PASSWORD = 'admin123';
 
 // Get all users
-app.get('/users', async (req, res) => {
+app.get('/api/users', async (req, res) => {
   try {
     const snapshot = await db.collection('users').orderBy('created_at', 'desc').get();
     const users = [];
@@ -46,7 +46,7 @@ app.get('/users', async (req, res) => {
 });
 
 // Register new user
-app.post('/users/register', async (req, res) => {
+app.post('/api/users/register', async (req, res) => {
   try {
     const { name, email, phone, password } = req.body;
 
@@ -88,7 +88,7 @@ app.post('/users/register', async (req, res) => {
 });
 
 // User login
-app.post('/users/login', async (req, res) => {
+app.post('/api/users/login', async (req, res) => {
   try {
     const { identifier, password } = req.body; // identifier can be email or phone
 
@@ -151,7 +151,7 @@ app.post('/users/login', async (req, res) => {
 });
 
 // Approve user
-app.put('/users/:id/approve', async (req, res) => {
+app.put('/api/users/:id/approve', async (req, res) => {
   try {
     const { id } = req.params;
     const { admin_password } = req.body;
@@ -173,7 +173,7 @@ app.put('/users/:id/approve', async (req, res) => {
 });
 
 // Reject user
-app.put('/users/:id/reject', async (req, res) => {
+app.put('/api/users/:id/reject', async (req, res) => {
   try {
     const { id } = req.params;
     const { admin_password } = req.body;
@@ -195,7 +195,7 @@ app.put('/users/:id/reject', async (req, res) => {
 });
 
 // Delete user
-app.delete('/users/:id', async (req, res) => {
+app.delete('/api/users/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { admin_password } = req.body;
