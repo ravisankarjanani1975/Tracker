@@ -4,6 +4,7 @@ import { API_URL } from '../config';
 function AddCustomerModal({ onClose, onSuccess }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [isContactPickerSupported, setIsContactPickerSupported] = useState(false);
 
   // Check if Contact Picker API is supported (Android Chrome)
@@ -47,9 +48,12 @@ function AddCustomerModal({ onClose, onSuccess }) {
       return;
     }
 
+    if (isLoading) return; // Prevent double submission
+
     // Clean phone number (remove non-digits)
     const cleanPhone = phone.replace(/\D/g, '');
 
+    setIsLoading(true);
     try {
       // Create new customer (no phone validation - allow duplicates)
       const response = await fetch(`${API_URL}/customers`, {
@@ -70,10 +74,12 @@ function AddCustomerModal({ onClose, onSuccess }) {
       } else {
         const error = await response.json();
         alert(error.error || 'Failed to create customer');
+        setIsLoading(false);
       }
     } catch (error) {
       console.error('Error creating customer:', error);
       alert('Failed to create customer');
+      setIsLoading(false);
     }
   };
 
@@ -147,8 +153,17 @@ function AddCustomerModal({ onClose, onSuccess }) {
             </small>
           </div>
 
-          <button type="submit" className="btn-primary" style={{ margin: '16px 0' }}>
-            Add Customer
+          <button
+            type="submit"
+            className="btn-primary"
+            style={{
+              margin: '16px 0',
+              opacity: isLoading ? 0.6 : 1,
+              cursor: isLoading ? 'not-allowed' : 'pointer'
+            }}
+            disabled={isLoading}
+          >
+            {isLoading ? '⏳ Saving...' : 'Add Customer'}
           </button>
         </form>
       </div>

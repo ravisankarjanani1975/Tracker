@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm start)",
+      "Bash(node:*)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(cmd /c \"taskkill /PID 28180 /F\")",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(cmdkey:*)",
+      "Bash(git credential:*)",
+      "Bash(printf:*)",
+      "Bash(git commit:*)",
+      "Bash(git restore:*)"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "financeapplication",
+  "version": "1.0.0",
+  "description": "A comprehensive finance tracking application for managing Weekly (10 weeks) and Monthly (5 months) loans with WhatsApp integration and cloud sync.",
+  "main": "index.js",
+  "scripts": {
+    "test": "testcafe chrome tests/ --screenshots path=screenshots,takeOnFails=true",
+    "test:video": "testcafe chrome tests/ --video videos --video-options singleFile=false,failedOnly=false,ffmpegPath=node_modules/@ffmpeg-installer/ffmpeg/ffmpeg.exe",
+    "test:all": "testcafe chrome tests/ --screenshots path=screenshots --video videos --reporter spec,html:reports/report.html",
+    "test:headless": "testcafe chrome:headless tests/ --video videos"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "testcafe": "^3.7.2",
+    "testcafe-reporter-html": "^1.4.6"
+  }
+}
