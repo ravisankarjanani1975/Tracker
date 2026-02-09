@@ -16,11 +16,26 @@ function CableDashboard({ onBackToModules }) {
   const [isRestoring, setIsRestoring] = useState(false);
   const fileInputRef = useRef(null);
 
-  // Get current month
-  const currentMonth = (() => {
+  // Selected month state (default to current month)
+  const [selectedMonth, setSelectedMonth] = useState(() => {
     const now = new Date();
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-  })();
+  });
+
+  // Helper to change month
+  const changeMonth = (direction) => {
+    const [year, month] = selectedMonth.split('-').map(Number);
+    const date = new Date(year, month - 1);
+    if (direction === 'prev') {
+      date.setMonth(date.getMonth() - 1);
+    } else {
+      date.setMonth(date.getMonth() + 1);
+    }
+    setSelectedMonth(`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`);
+  };
+
+  // For backwards compatibility
+  const currentMonth = selectedMonth;
 
   // Fetch stats
   const { data: stats, isLoading, mutate } = useSWR(`${API_URL}/stats`, fetcher, {
@@ -179,11 +194,11 @@ function CableDashboard({ onBackToModules }) {
   }
 
   if (activeTab === 'collection') {
-    return <CableCollection onBack={() => setActiveTab('dashboard')} />;
+    return <CableCollection onBack={() => setActiveTab('dashboard')} selectedMonth={selectedMonth} />;
   }
 
   if (activeTab === 'reports') {
-    return <CableReports onBack={() => setActiveTab('dashboard')} />;
+    return <CableReports onBack={() => setActiveTab('dashboard')} selectedMonth={selectedMonth} />;
   }
 
   if (activeTab === 'settings') {
@@ -251,8 +266,38 @@ function CableDashboard({ onBackToModules }) {
           </button>
           <h1>Cable Connection Tracker</h1>
         </div>
-        <div className="header-right">
-          <span className="current-month">{getMonthName(stats?.currentMonth)}</span>
+        <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <button
+            onClick={() => changeMonth('prev')}
+            style={{
+              background: 'rgba(255,255,255,0.1)',
+              border: 'none',
+              color: 'white',
+              padding: '8px 12px',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '16px'
+            }}
+            title="Previous Month"
+          >
+            ◀
+          </button>
+          <span className="current-month">{getMonthName(selectedMonth)}</span>
+          <button
+            onClick={() => changeMonth('next')}
+            style={{
+              background: 'rgba(255,255,255,0.1)',
+              border: 'none',
+              color: 'white',
+              padding: '8px 12px',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '16px'
+            }}
+            title="Next Month"
+          >
+            ▶
+          </button>
         </div>
       </header>
 
