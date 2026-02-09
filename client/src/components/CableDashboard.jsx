@@ -17,6 +17,7 @@ function CableDashboard({ onBackToModules }) {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [paymentDate, setPaymentDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const fileInputRef = useRef(null);
 
   // Selected month state (default to current month)
@@ -84,9 +85,10 @@ function CableDashboard({ onBackToModules }) {
 
   // Confirm payment with selected date
   const confirmPayment = async () => {
-    if (!selectedCustomer || !paymentDate) return;
+    if (!selectedCustomer || !paymentDate || isProcessingPayment) return;
 
     try {
+      setIsProcessingPayment(true);
       const response = await fetch(`${API_URL}/payments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -110,6 +112,8 @@ function CableDashboard({ onBackToModules }) {
       mutateCollection();
     } catch (error) {
       alert('Error: ' + error.message);
+    } finally {
+      setIsProcessingPayment(false);
     }
   };
 
@@ -548,19 +552,23 @@ function CableDashboard({ onBackToModules }) {
               </button>
               <button
                 onClick={confirmPayment}
+                disabled={isProcessingPayment}
                 style={{
                   flex: 1,
                   padding: '10px',
                   border: 'none',
                   borderRadius: '6px',
-                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                  background: isProcessingPayment
+                    ? '#94a3b8'
+                    : 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                   color: 'white',
-                  cursor: 'pointer',
+                  cursor: isProcessingPayment ? 'not-allowed' : 'pointer',
                   fontSize: '14px',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  opacity: isProcessingPayment ? 0.7 : 1
                 }}
               >
-                ✓ Confirm Payment
+                {isProcessingPayment ? '⏳ Processing...' : '✓ Confirm Payment'}
               </button>
             </div>
           </div>
